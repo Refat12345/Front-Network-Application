@@ -18,6 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
   static AuthCubit get(context) => BlocProvider.of(context);
   LoginModel? loginModel ;
   RegisterModel? registerModel;
+  RegisterModel? registerModell;
 
   ErrorModel? errorModel;
 
@@ -71,9 +72,46 @@ class AuthCubit extends Cubit<AuthState> {
         print('حدث خطأ في عملية تسجيل الدخول');
       }
     } catch (e) {
+      emit(AuthRegisterErrorState());
       print('حدث خطأ أثناء التواصل مع الخادم: $e');
     }
   }
+
+
+  Future<void> registerAdmin({
+    required username, required password, required confirmPassword,required verificationCode
+  }) async {
+    final url = Uri.parse('${EndPoint.url}auth/registerAsAdmin');
+
+    final body = jsonEncode({
+      'username': username,
+      'password': password,
+      'confirm_password':confirmPassword,
+      'verificationCode': verificationCode
+    });
+    final headers = {'Content-Type': 'application/json'};
+    try {
+      final response = await http.post(url, body: body, headers: headers);
+
+      if (response.statusCode == 200) {
+        registerModell = RegisterModel.fromJson(jsonDecode(response.body));
+        emit(AuthRegisterSuccessState1(registerModel!));
+        print('تم تسجيل الدخول بنجاح');
+      } else {
+        emit(AuthRegisterErrorState1());
+        print('حدث خطأ في عملية تسجيل الدخول');
+      }
+    } catch (e) {
+      print('حدث خطأ أثناء التواصل مع الخادم: $e');
+    }
+  }
+
+
+
+
+
+
+
 
   bool status = true;
 

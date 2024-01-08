@@ -31,7 +31,7 @@ class GetmemberoutofgroupCubit extends Cubit<GetmemberoutofgroupState> {
         url: "user/getUsers/${groupId}",)
           .then((value) {
         getAllUserOutOfThisGroupModel = GetAllUserOutOfThisGroupModel.fromJson(jsonDecode(value.body));
-        emit(LoadingState5());
+        emit(SuccessState5());
       }).catchError((onError) {
         print(onError.toString());
         emit(LoadingState5());

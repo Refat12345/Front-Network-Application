@@ -10,6 +10,7 @@ import '../Cubit/authBloc/state.dart';
 import '../network/helper.dart';
 import '../network/local/cache.dart';
 import '../style/color.dart';
+import 'Admin/ShowAllMember.dart';
 import 'getAllGroup.dart';
 
 class Login extends StatelessWidget {
@@ -33,12 +34,28 @@ class Login extends StatelessWidget {
           CacheHelper.saveData(
               key: "username", value:state.loginModel.user?.userName);
 
-           Navigator.push(
-             context,
-             MaterialPageRoute(
-               builder: (context) => GetAllGroup(),
-             ),
-           );
+          CacheHelper.saveData(
+              key: "role", value:state.loginModel.user?.role);
+
+          if(state.loginModel.user?.role=='User'){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GetAllGroup(),
+              ),
+            );
+          }
+
+          if(state.loginModel.user?.role=='Admin'){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ShowAllMember(),
+              ),
+            );
+          }
+
+
 
         }
 

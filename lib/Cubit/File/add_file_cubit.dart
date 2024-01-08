@@ -74,7 +74,7 @@ class AddFileCubit extends Cubit<AddFileState> {
   Future pickFile(BuildContext context, int groupId) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'txt'],
+      allowedExtensions: ['txt','java','dart'],
     );
     if (result != null) {
       Uint8List fileBytes = result.files.single.bytes!;
@@ -96,7 +96,7 @@ class AddFileCubit extends Cubit<AddFileState> {
   Future pickUpdateFile(BuildContext context, int groupId) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'txt'],
+      allowedExtensions: [ 'txt','java','dart'],
     );
     if (result != null) {
       Uint8List fileBytes = result.files.single.bytes!;

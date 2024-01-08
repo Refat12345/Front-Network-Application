@@ -26,6 +26,7 @@ class User {
   List<String>? groups;
   List<String>? files;
   List<String>? myFiles;
+  String? role;
 
   User(
       {this.userId,
@@ -33,7 +34,10 @@ class User {
         this.userGroups,
         this.groups,
         this.files,
-        this.myFiles});
+        this.myFiles,
+        this.role
+
+      });
 
   User.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -42,6 +46,7 @@ class User {
     groups = json['groups'].cast<String>();
     files = json['files'].cast<String>();
     myFiles = json['my_files'].cast<String>();
+    role = json['role'];
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +57,8 @@ class User {
     data['groups'] = this.groups;
     data['files'] = this.files;
     data['my_files'] = this.myFiles;
+    data['role'] = this.role;
+
     return data;
   }
 }

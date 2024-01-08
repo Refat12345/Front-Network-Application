@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var k = CacheHelper.getData(key: 'token');
 
+
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: MaterialApp(
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.secularOneTextTheme(),
             useMaterial3: true,
           ),
-           home: k==null? HomePage():GetAllGroup()
+            home: k==null? HomePage():GetAllGroup()
           // home: Login()
 
       ),

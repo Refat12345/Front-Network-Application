@@ -64,12 +64,52 @@ class Register extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            "SIGN UP",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey[700],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            children: [
+                              Text(
+                                "SIGN UP",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+
+
+                              IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Enter Verify Code"),
+                                        content: TextField(
+                                          decoration: InputDecoration(
+                                            hintText: "Enter code",
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            child: Text("OK"),
+                                            onPressed: () {
+                                              AuthCubit.get(context).registerAdmin(username: userName.text, password: password.text, confirmPassword: confirmPassword.text,verificationCode:'SHADOWEN');
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                icon: Icon(
+                                  Icons.person_add,
+                                  color: Colors.grey[700],
+                                  size: 18,
+                                ),
+                              ),
+
+
+                            ],
                           ),
                           const SizedBox(
                             height: 8,

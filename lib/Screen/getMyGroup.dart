@@ -54,7 +54,7 @@ class GetMyGroup extends StatelessWidget {
             }
 
             return getMyGroupModel!=null ?Scaffold(
-              appBar: AppBar(backgroundColor: Colors.deepPurple,title: Text('My Group',style: TextStyle(color: Colors.black,fontSize: 25),),),
+              appBar: AppBar(backgroundColor:  Colors.deepPurpleAccent,title: Text('My Group',style: TextStyle(color: Colors.black,fontSize: 25),),),
 
               body: RefreshIndicator(
                 onRefresh: ()async=>context.read<GetMyGroupCubit>().getMyGroup(),

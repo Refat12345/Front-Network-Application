@@ -31,3 +31,12 @@ class AuthRegisterSuccessState extends AuthState {
 class AuthRegisterErrorState extends AuthState {}
 
 class ChangeState extends AuthState {}
+
+class AuthRegisterLoadingState1 extends AuthState {}
+
+class AuthRegisterSuccessState1 extends AuthState {
+  RegisterModel registerModel;
+  AuthRegisterSuccessState1(this.registerModel);
+}
+
+class AuthRegisterErrorState1 extends AuthState {}
