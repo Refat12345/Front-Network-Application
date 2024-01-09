@@ -28,10 +28,10 @@ class FileViewerScreen extends StatelessWidget {
         listener: (context, state) {
           if(state is SuccessStateadd)
           {
-            // Navigator.pop(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => GetAllFilePage(groupId: groupId)),
-            // );
+            Navigator.pop(
+              context,
+              MaterialPageRoute(builder: (context) => GetAllFilePage(groupId: groupId)),
+            );
 
 
 

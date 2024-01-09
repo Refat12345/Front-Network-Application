@@ -7,6 +7,7 @@ import '../network/local/cache.dart';
 import '../style/color.dart';
 import 'Admin/ShowAllMember.dart';
 import 'getAllGroup.dart';
+import 'login.dart';
 
 class Register extends StatelessWidget {
    Register({super.key});
@@ -126,6 +127,12 @@ class Register extends StatelessWidget {
                                   size: 18,
                                 ),
                               ),
+
+
+
+
+
+
 
 
                             ],

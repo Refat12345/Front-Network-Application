@@ -99,10 +99,18 @@ class GetAllFilePage extends StatelessWidget {
             GetAllFileModel? getAllFileModel =
                 AddFileCubit.get(context).getAllFileModel;
 
+
+
             return Scaffold(
               appBar: AppBar(
                 title: Text('Get All Files'),
                 actions: [
+            IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+             AddFileCubit.get(context).getAllFile(groupId: groupId);
+            },
+            ),
                   PopupMenuButton<String>(
                     onSelected: (value) {
                       if (value == 'checkin') {

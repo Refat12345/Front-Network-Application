@@ -33,6 +33,11 @@ class GetMemberOutOfGroup extends StatelessWidget {
             context.read<GetmemberoutofgroupCubit>().getMembersOutOfGroup( groupId);
             flutterToast( state.messageModel.message!, "Sucess");
 
+            Navigator.pop(
+              context,
+              MaterialPageRoute(builder: (context) => GetAllGroupMembers(groupId: groupId)),
+            );
+
           }
 
         },

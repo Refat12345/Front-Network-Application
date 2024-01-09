@@ -47,7 +47,16 @@ class GetAllGroupMembers extends StatelessWidget {
                 GetmembersingroupCubit.get(context).getmembersmodle;
             return  getmembermodel!=null ?Scaffold(
 
-              appBar: AppBar(title: Text('Members'),),
+              appBar: AppBar(title: Text('Members'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () {
+                    GetmembersingroupCubit.get(context).getMembers(this.groupId);
+                  },
+                ),
+              ],
+              ),
               body: getmembermodel?.membersDTOS?.length != 0 ?RefreshIndicator(
                 onRefresh: ()async=>context.read<GetmembersingroupCubit>().getMembers(this.groupId),
 

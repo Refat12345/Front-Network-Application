@@ -49,7 +49,10 @@ class GetAllGroup extends StatelessWidget {
             GetAllGroupmodel? getAllGroupmodel =
                 GetallgroupCubit.get(context).getAllGroupmodel;
             return getAllGroupmodel!=null ?Scaffold(
-              appBar: AppBar(backgroundColor: Colors.deepPurple,title: Text('All Group',style: TextStyle(color: Colors.black,fontSize: 25),),),
+              appBar: AppBar(backgroundColor: Colors.deepPurple,title: Text('All Group',style: TextStyle(color: Colors.black,fontSize: 25),),
+
+
+              ),
               drawer: Drawer(
                 child: ListView(
                   padding: EdgeInsets.zero,
