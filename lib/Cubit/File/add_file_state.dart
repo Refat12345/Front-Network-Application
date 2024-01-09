@@ -116,3 +116,14 @@ class ErrorStatedelfile extends AddFileState {
   ErrorStatedelfile(this.errormodel);
 
 }
+
+
+
+class LoadingState139 extends AddFileState {}
+class SuccessState139 extends AddFileState {
+
+}
+class ErrorState139 extends AddFileState {
+
+
+}

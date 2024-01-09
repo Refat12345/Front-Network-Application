@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:networkapplication/Cubit/authBloc/state.dart';
 import 'package:networkapplication/model/errormodel.dart';
 
+import '../../model/Admin/registeradminmodel.dart';
 import '../../model/loginmodel.dart';
 import '../../model/registermodel.dart';
 import '../../network/helper.dart';
@@ -18,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
   static AuthCubit get(context) => BlocProvider.of(context);
   LoginModel? loginModel ;
   RegisterModel? registerModel;
-  RegisterModel? registerModell;
+  RegisterAdminModel? registerModelAdmin;
 
   ErrorModel? errorModel;
 
@@ -92,16 +93,18 @@ class AuthCubit extends Cubit<AuthState> {
     final headers = {'Content-Type': 'application/json'};
     try {
       final response = await http.post(url, body: body, headers: headers);
+      print(response.statusCode);
 
       if (response.statusCode == 200) {
-        registerModell = RegisterModel.fromJson(jsonDecode(response.body));
-        emit(AuthRegisterSuccessState1(registerModel!));
+        print('sucess admin register');
+        registerModelAdmin = RegisterAdminModel.fromJson(jsonDecode(response.body));
+        emit(AuthRegisterSuccessState1(registerModelAdmin!));
         print('تم تسجيل الدخول بنجاح');
       } else {
-        emit(AuthRegisterErrorState1());
         print('حدث خطأ في عملية تسجيل الدخول');
       }
     } catch (e) {
+      emit(AuthRegisterErrorState());
       print('حدث خطأ أثناء التواصل مع الخادم: $e');
     }
   }

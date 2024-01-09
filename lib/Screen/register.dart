@@ -5,6 +5,7 @@ import '../Cubit/authBloc/cubit.dart';
 import '../Cubit/authBloc/state.dart';
 import '../network/local/cache.dart';
 import '../style/color.dart';
+import 'Admin/ShowAllMember.dart';
 import 'getAllGroup.dart';
 
 class Register extends StatelessWidget {
@@ -12,6 +13,7 @@ class Register extends StatelessWidget {
   final TextEditingController userName=TextEditingController();
   final TextEditingController password=TextEditingController();
   final TextEditingController confirmPassword=TextEditingController();
+   final TextEditingController verificationCode=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,22 @@ class Register extends StatelessWidget {
           );
 
         }
+
+        if(state is AuthRegisterSuccessState1){
+          CacheHelper.saveData(
+              key: "token", value:state.registerModelAdmin.token);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ShowAllMember(),
+            ),
+          );
+
+        }
+
+
+
       },
       builder: (context, state) {
         return Padding(
@@ -85,6 +103,7 @@ class Register extends StatelessWidget {
                                       return AlertDialog(
                                         title: Text("Enter Verify Code"),
                                         content: TextField(
+                                          controller:verificationCode ,
                                           decoration: InputDecoration(
                                             hintText: "Enter code",
                                           ),
@@ -93,7 +112,7 @@ class Register extends StatelessWidget {
                                           TextButton(
                                             child: Text("OK"),
                                             onPressed: () {
-                                              AuthCubit.get(context).registerAdmin(username: userName.text, password: password.text, confirmPassword: confirmPassword.text,verificationCode:'SHADOWEN');
+                                              AuthCubit.get(context).registerAdmin(username: userName.text, password: password.text, confirmPassword: confirmPassword.text,verificationCode:verificationCode.text);
                                             },
                                           ),
                                         ],

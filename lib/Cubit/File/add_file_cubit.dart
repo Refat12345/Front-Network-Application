@@ -79,16 +79,12 @@ class AddFileCubit extends Cubit<AddFileState> {
     if (result != null) {
       Uint8List fileBytes = result.files.single.bytes!;
       String fileName = result.files.single.name!;
-      print('Selected file name: $fileName');
-      print('File bytes: $fileBytes');
-
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => FileViewerScreen(fileBytes: fileBytes, groupId: groupId,fileName: fileName,),
         ),
       );
-      // addNewFile();
     }
   }
 
@@ -101,14 +97,9 @@ class AddFileCubit extends Cubit<AddFileState> {
     if (result != null) {
       Uint8List fileBytes = result.files.single.bytes!;
       String fileName = result.files.single.name!;
-      print('Selected file name: $fileName');
-      print('File bytes: $fileBytes');
+
 
       updateFile(groupId: groupId, fileBytes: fileBytes, fileName: fileName);
-
-      // AddFileCubit.get(context).updateFile(groupId: groupId);
-
-
 
     }
   }
@@ -173,7 +164,7 @@ class AddFileCubit extends Cubit<AddFileState> {
     Map<String, dynamic> body = {
       'name': fileName,
     };
-
+emit(LoadingState139());
     try {
       final response = await http.post(
         Uri.parse(apiUrl),
@@ -189,9 +180,12 @@ class AddFileCubit extends Cubit<AddFileState> {
             builder: (context) => ViewFileContent(text:response.body ,fileName: fileName,),
           ),
         );
+        emit(SuccessState139());
+
 
       } else {
-        print('error');
+        emit(ErrorState139());
+
       }
     }
     catch (error) {
@@ -289,7 +283,6 @@ class AddFileCubit extends Cubit<AddFileState> {
       } else {
         errorModel = ErrorModel.fromJson(jsonDecode(response.body));
         emit(ErrorStatecheckin(errorModel!));
-
       }
     }
     catch (e) {
@@ -321,14 +314,11 @@ try{
   if (response.statusCode == 200) {
     messageModel = MessageModel.fromJson(jsonDecode(response.body));
     emit(SuccessStatedelfile(messageModel!));
-
-
   }
 
   else {
 
     errorModel = ErrorModel.fromJson(jsonDecode(response.body));
-
     emit(ErrorStatedelfile(errorModel!));
 
   }

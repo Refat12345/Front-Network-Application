@@ -42,9 +42,9 @@ class GetAllFilePage extends StatelessWidget {
           }
           if(state is SuccessStatedelfile)
           {
+            AddFileCubit.get(context).selectedIds.clear();
             context.read<AddFileCubit>().getAllFile(groupId: groupId);
             flutterToast( state.messageModel.message??'s', "Sucess");
-
           }
 
 

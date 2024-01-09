@@ -1,6 +1,7 @@
 import 'package:networkapplication/model/errormodel.dart';
 import 'package:networkapplication/model/loginmodel.dart';
 
+import '../../model/Admin/registeradminmodel.dart';
 import '../../model/registermodel.dart';
 
 abstract class AuthState {}
@@ -32,11 +33,12 @@ class AuthRegisterErrorState extends AuthState {}
 
 class ChangeState extends AuthState {}
 
+
 class AuthRegisterLoadingState1 extends AuthState {}
 
 class AuthRegisterSuccessState1 extends AuthState {
-  RegisterModel registerModel;
-  AuthRegisterSuccessState1(this.registerModel);
+  RegisterAdminModel registerModelAdmin;
+  AuthRegisterSuccessState1(this.registerModelAdmin);
 }
 
 class AuthRegisterErrorState1 extends AuthState {}
