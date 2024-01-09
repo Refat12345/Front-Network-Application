@@ -169,41 +169,84 @@ class GetAllFilePage extends StatelessWidget {
               body: RefreshIndicator(
                 onRefresh: ()async=>context.read<AddFileCubit>().getAllFile(groupId: groupId),
 
+                // child: ListView.builder(
+                //   itemCount: getAllFileModel?.groupFilesDTOResponses?.length ?? 0,
+                //   itemBuilder: (context, index) {
+                //
+                //
+                //
+                //     String? fileName = getAllFileModel?.groupFilesDTOResponses![index].fileName;
+                //     String trimmedFileName = fileName!.replaceAll(RegExp(r'\d+$'), '');
+                //
+                //
+                //     return ListTile(
+                //       leading: Icon(Icons.file_copy),
+                //       title: Text(trimmedFileName),
+                //       subtitle: Text(''),
+                //         trailing: getAllFileModel?.groupFilesDTOResponses![index].status == true
+                //            ? Icon(Icons.check_circle, color: Colors.green)
+                //            : Icon(Icons.remove_circle, color: Colors.grey),
+                //       onTap: () {
+                //         if(AddFileCubit.get(context).selectedIds.length!=0){
+                //           AddFileCubit.get(context).toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId??0);
+                //         }
+                //
+                //         if(AddFileCubit.get(context).selectedIds.length==0){
+                //           AddFileCubit.get(context).getFileContent(groupID:this.groupId,
+                //               fileName: trimmedFileName,context: context);
+                //         }
+                //
+                //
+                //       },
+                //       onLongPress: () {
+                //         AddFileCubit.get(context)
+                //             .toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId??0);
+                //       },
+                //         tileColor: AddFileCubit.get(context).selectedIds.contains(getAllFileModel?.groupFilesDTOResponses![index].fileId) ? Colors.tealAccent:null,
+                //
+                //     );
+                //   },
+                // ),
                 child: ListView.builder(
                   itemCount: getAllFileModel?.groupFilesDTOResponses?.length ?? 0,
                   itemBuilder: (context, index) {
 
-
-
                     String? fileName = getAllFileModel?.groupFilesDTOResponses![index].fileName;
                     String trimmedFileName = fileName!.replaceAll(RegExp(r'\d+$'), '');
 
+                    return Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.file_copy),
+                          title: Text(trimmedFileName),
+                          subtitle: Text(''),
+                          trailing: getAllFileModel?.groupFilesDTOResponses![index].status == true
+                              ? Icon(Icons.check_circle, color: Colors.green)
+                              : Icon(Icons.remove_circle, color: Colors.grey),
+                          onTap: () {
+                            if (AddFileCubit.get(context).selectedIds.length != 0) {
+                              AddFileCubit.get(context).toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId ?? 0);
+                            }
 
-                    return ListTile(
-                      leading: Icon(Icons.file_copy),
-                      title: Text(trimmedFileName),
-                      subtitle: Text(''),
-                        trailing: getAllFileModel?.groupFilesDTOResponses![index].status == true
-                           ? Icon(Icons.check_circle, color: Colors.green)
-                           : Icon(Icons.remove_circle, color: Colors.grey),
-                      onTap: () {
-                        if(AddFileCubit.get(context).selectedIds.length!=0){
-                          AddFileCubit.get(context).toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId??0);
-                        }
-
-                        if(AddFileCubit.get(context).selectedIds.length==0){
-                          AddFileCubit.get(context).getFileContent(groupID:this.groupId,
-                              fileName: trimmedFileName,context: context);
-                        }
-
-
-                      },
-                      onLongPress: () {
-                        AddFileCubit.get(context)
-                            .toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId??0);
-                      },
-                        tileColor: AddFileCubit.get(context).selectedIds.contains(getAllFileModel?.groupFilesDTOResponses![index].fileId) ? Colors.blue:null,
-
+                            if (AddFileCubit.get(context).selectedIds.length == 0) {
+                              AddFileCubit.get(context).getFileContent(
+                                groupID: this.groupId,
+                                fileName: trimmedFileName,
+                                context: context,
+                              );
+                            }
+                          },
+                          onLongPress: () {
+                            AddFileCubit.get(context).toggleSelection(getAllFileModel?.groupFilesDTOResponses![index].fileId ?? 0);
+                          },
+                          tileColor: AddFileCubit.get(context).selectedIds.contains(getAllFileModel?.groupFilesDTOResponses![index].fileId) ? Colors.tealAccent : null,
+                        ),
+                        Divider(
+                          color: Colors.grey,
+                          thickness: 1,
+                          height: 1,
+                        ),
+                      ],
                     );
                   },
                 ),

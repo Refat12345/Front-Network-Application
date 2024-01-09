@@ -128,13 +128,6 @@ class Register extends StatelessWidget {
                                 ),
                               ),
 
-
-
-
-
-
-
-
                             ],
                           ),
                           const SizedBox(
