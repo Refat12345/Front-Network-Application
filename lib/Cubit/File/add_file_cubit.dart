@@ -15,6 +15,7 @@ import 'dart:html' as html;
 
 import '../../Screen/ViewFile.dart';
 import '../../Screen/ViewFileContent.dart';
+import '../../model/Admin/logmodel.dart';
 import '../../model/errormodel.dart';
 import '../../model/getallfile.dart';
 import '../../model/message.dart';
@@ -32,6 +33,8 @@ class AddFileCubit extends Cubit<AddFileState> {
   ErrorModel? errorModel;
   GetAllFileModel? getAllFileModel;
   List<int> selectedIds = [];
+
+  LogModel? logModel;
 
 
   Future<void> getAllFile({

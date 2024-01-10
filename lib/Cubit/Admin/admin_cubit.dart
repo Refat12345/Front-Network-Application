@@ -17,6 +17,7 @@ class AdminCubit extends Cubit<AdminState> {
 
   GetAllUserModel? getAllUserModel;
   LogModel? logModel;
+  LogModel? logModell;
 
   Future<void> getAllUser()async {
     try{
@@ -58,5 +59,49 @@ class AdminCubit extends Cubit<AdminState> {
     }
 
   }
+
+
+
+  Future<void> getUserLock()async {
+    try{
+      emit(AdminLoadinga());
+      HttpHelper.getData(
+        url: "user/getUsersWithFaultCount",)
+          .then((value) {
+        getAllUserModel = GetAllUserModel.fromJson(jsonDecode(value.body));
+        emit(AdminSucessa());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(AdminErrora());
+      });
+    }
+    catch (e) {
+      print('حدث خطأ أثناء التواصل مع الخادم: $e');
+    }
+
+  }
+
+
+
+  Future<void> getfilereport({required fileId})async {
+    try{
+      emit(LoadingState1345());
+      HttpHelper.getData(
+        url: "user/getUserFileLogs/${fileId}",)
+          .then((value) {
+        logModell = LogModel.fromJson(jsonDecode(value.body));
+        emit(SuccessState1345());
+      }).catchError((onError) {
+        print(onError.toString());
+        emit(ErrorState1345());
+      });
+    }
+    catch (e) {
+      print('حدث خطأ أثناء التواصل مع الخادم: $e');
+    }
+
+  }
+
+
 
 }

@@ -41,17 +41,17 @@ class GetMyGroup extends StatelessWidget {
           builder: (context, state) {
             GetMyGroupModel? getMyGroupModel =
                 GetMyGroupCubit.get(context).getMyGroupModel;
-            if (getMyGroupModel == null) {
-              Fluttertoast.showToast(
-                msg: "ليس لديك أي مجموعة تملكها",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0,
-              );
-            }
+            // if (getMyGroupModel == null) {
+            //   Fluttertoast.showToast(
+            //     msg: "ليس لديك أي مجموعة تملكها",
+            //     toastLength: Toast.LENGTH_SHORT,
+            //     gravity: ToastGravity.CENTER,
+            //     timeInSecForIosWeb: 1,
+            //     backgroundColor: Colors.red,
+            //     textColor: Colors.white,
+            //     fontSize: 16.0,
+            //   );
+            // }
 
             return getMyGroupModel!=null ?Scaffold(
               appBar: AppBar(backgroundColor:  Colors.deepPurpleAccent,title: Text('My Group',style: TextStyle(color: Colors.black,fontSize: 25),),),

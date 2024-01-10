@@ -24,10 +24,35 @@ class AuthCubit extends Cubit<AuthState> {
   ErrorModel? errorModel;
 
 
+//   Future<void> login({
+//     required username, required password
+// }) async {
+//     final url = Uri.parse('${EndPoint.url}auth/login');
+//
+//     final body = jsonEncode({
+//       'username': username,
+//       'password': password,
+//     });
+//     emit(AuthLoginLoadingState());
+//     final headers = {'Content-Type': 'application/json'};
+//     try {
+//       final response = await http.post(url, body: body, headers: headers);
+//
+//       if (response.statusCode == 200) {
+//         loginModel = LoginModel.fromJson(jsonDecode(response.body));
+//         emit(AuthLoginSuccessState(loginModel!));
+//       } else {
+//         errorModel = ErrorModel.fromJson(jsonDecode(response.body));
+//         emit(AuthLoginErrorState(errorModel!));
+//       }
+//     } catch (e) {
+//       print('حدث خطأ أثناء التواصل مع الخادم: $e');
+//     }
+//   }
   Future<void> login({
     required username, required password
-}) async {
-    final url = Uri.parse('${EndPoint.url}auth/login');
+  }) async {
+    var client = http.Client();
 
     final body = jsonEncode({
       'username': username,
@@ -35,7 +60,9 @@ class AuthCubit extends Cubit<AuthState> {
     });
     final headers = {'Content-Type': 'application/json'};
     try {
-      final response = await http.post(url, body: body, headers: headers);
+
+      final url = Uri.parse('${EndPoint.url}auth/login');
+      final response = await client.post(url,body: body,headers: headers).timeout(Duration(seconds: 60));
 
       if (response.statusCode == 200) {
         loginModel = LoginModel.fromJson(jsonDecode(response.body));
@@ -47,6 +74,8 @@ class AuthCubit extends Cubit<AuthState> {
       }
     } catch (e) {
       print('حدث خطأ أثناء التواصل مع الخادم: $e');
+    }finally {
+      client.close();
     }
   }
 
@@ -54,6 +83,8 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> register({
     required username, required password, required confirmPassword
   }) async {
+    var client = http.Client();
+
     final url = Uri.parse('${EndPoint.url}auth/register');
 
     final body = jsonEncode({
@@ -63,7 +94,8 @@ class AuthCubit extends Cubit<AuthState> {
     });
     final headers = {'Content-Type': 'application/json'};
     try {
-      final response = await http.post(url, body: body, headers: headers);
+
+      final response = await client.post(url, body: body, headers: headers).timeout(Duration(seconds: 60));
 
       if (response.statusCode == 200) {
         registerModel = RegisterModel.fromJson(jsonDecode(response.body));
@@ -76,6 +108,9 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthRegisterErrorState());
       print('حدث خطأ أثناء التواصل مع الخادم: $e');
     }
+    finally {
+      client.close();
+    }
   }
 
 
@@ -83,6 +118,7 @@ class AuthCubit extends Cubit<AuthState> {
     required username, required password, required confirmPassword,required verificationCode
   }) async {
     final url = Uri.parse('${EndPoint.url}auth/registerAsAdmin');
+    var client = http.Client();
 
     final body = jsonEncode({
       'username': username,
@@ -92,7 +128,9 @@ class AuthCubit extends Cubit<AuthState> {
     });
     final headers = {'Content-Type': 'application/json'};
     try {
-      final response = await http.post(url, body: body, headers: headers);
+
+      final response = await client.post(url, body: body, headers: headers).timeout(Duration(seconds: 60));
+
       print(response.statusCode);
 
       if (response.statusCode == 200) {
@@ -106,6 +144,9 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(AuthRegisterErrorState());
       print('حدث خطأ أثناء التواصل مع الخادم: $e');
+    }
+    finally {
+      client.close();
     }
   }
 

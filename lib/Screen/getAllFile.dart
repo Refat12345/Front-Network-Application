@@ -1,11 +1,13 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:networkapplication/Screen/reportscreen.dart';
 import 'package:path/path.dart' as path;
 
 import '../Cubit/File/add_file_cubit.dart';
 import '../model/getallfile.dart';
 import '../network/helper.dart';
+import 'Admin/showlog.dart';
 import 'ViewFile.dart';
 
 
@@ -54,6 +56,8 @@ class GetAllFilePage extends StatelessWidget {
             flutterToast( state.messageModel.message??'s', "Sucess");
 
           }
+
+
 
 
         },
@@ -134,6 +138,17 @@ class GetAllFilePage extends StatelessWidget {
                         AddFileCubit.get(context).deleteFile(groupId:this.groupId);
 
                       }
+
+                      if (value == 'report') {
+var id  = AddFileCubit.get(context).selectedIds[0];
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => showreport(id),
+                          ),
+                        );
+
+                      }
                     },
                     itemBuilder: (BuildContext context) {
                       return [
@@ -161,6 +176,10 @@ class GetAllFilePage extends StatelessWidget {
                           child: Text('delete_File'),
                         ),
 
+                        PopupMenuItem<String>(
+                          value: 'report',
+                          child: Text('Report'),
+                        ),
                       ];
                     },
                   ),

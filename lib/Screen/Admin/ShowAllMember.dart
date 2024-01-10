@@ -22,9 +22,6 @@ class ShowAllMember extends StatelessWidget {
         listener: (context, state) {
 
 
-
-
-
         },
         child: BlocConsumer<AdminCubit, AdminState>(
           listener: (context, state) {

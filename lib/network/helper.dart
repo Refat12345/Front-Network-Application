@@ -39,9 +39,9 @@ class EndPoint {
 
   //static String imageShopUrl="http://192.168.1.105:8000/image_shop/";
 
-  static String url = "http://192.168.1.105:8080/api/";
+  static String url = "http://192.168.116.142:8080/api/";
 
-  static String  baseUrl = "http://192.168.1.105:8080";
+  //static String  baseUrl = "http://192.168.116.156:8080";
   //static String imageUrl="http://192.168.1.104:8000/";
 }
 Future<void> flutterToast(String message, String type) async {

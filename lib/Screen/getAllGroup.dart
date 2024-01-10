@@ -45,7 +45,7 @@ class GetAllGroup extends StatelessWidget {
 
           },
           builder: (context, state) {
-            var k = 'Welcome '+CacheHelper.getData(key: 'username');
+            var k = 'Welcome ';
             GetAllGroupmodel? getAllGroupmodel =
                 GetallgroupCubit.get(context).getAllGroupmodel;
             return getAllGroupmodel!=null ?Scaffold(
@@ -65,7 +65,7 @@ class GetAllGroup extends StatelessWidget {
                       child: Text(k),
                     ),
                     ListTile(
-                      title: const Text('Show group members'),
+                      title: const Text('Show My Group'),
                       onTap: () {
                         Navigator.push(
                           context,
